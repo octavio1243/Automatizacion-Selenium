@@ -1,0 +1,19 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+target/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+.jpb
+**/.DS_Store
+
+### VS Code ###
+.vscode/
+
+### Personal files ignored ###
+personal.*
