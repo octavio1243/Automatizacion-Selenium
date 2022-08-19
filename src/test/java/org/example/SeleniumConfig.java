@@ -38,6 +38,7 @@ public class SeleniumConfig {
     public WebDriver getDriver() {
         return driver;
     }
+    public String getOS(){return  OS;}
 
     public void configBasic() {
         this.driver.manage().window().maximize();

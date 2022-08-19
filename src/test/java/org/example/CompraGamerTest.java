@@ -2,19 +2,27 @@ package org.example;
 
 import org.junit.Before;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.TakesScreenshot;
 
 import org.junit.Test;
+import org.openqa.selenium.io.FileHandler;
+
+import javax.management.RuntimeErrorException;
+import java.io.File;
 
 public class CompraGamerTest {
     //"chrome" or "firefox"
     private final String browser = "chrome";
     private WebDriver driver;
+    private String OS;
 
     @Before
     public void setDriver() {
         SeleniumConfig seleniumConfig = new SeleniumConfig(browser);
         this.driver = seleniumConfig.getDriver();
+        this.OS = seleniumConfig.getOS();
     }
 
     @Test
@@ -30,6 +38,15 @@ public class CompraGamerTest {
             System.out.println("Cantidad productos distintos en carrito: '" + cantidad + "'");
         } catch (Exception e) {
             //Aca tomar alguna captura y mandarla a la carpeta de errores
+            TakesScreenshot ts=(TakesScreenshot)driver;
+            File source=ts.getScreenshotAs(OutputType.FILE);
+            try {
+                String rutaScreenshot = (OS == "Windows" ? "\\Screeshots\\productosDistintosCG.png" : "./Screenshots/productosDistintosCG.png");
+                FileHandler.copy(source, new File(rutaScreenshot));
+            }catch (Exception e2){
+                System.out.println(e2);
+            }
+            System.out.println("Screenshot taken");
         }
         //timeDelay(3000);
         driver.close();
@@ -53,6 +70,15 @@ public class CompraGamerTest {
             System.out.println("Cantidad productos del mismo tipo en carrito: '" + cantidad + "'");
         } catch (Exception e) {
             //Aca tomar alguna captura y mandarla a la carpeta de errores
+            TakesScreenshot ts=(TakesScreenshot)driver;
+            File source=ts.getScreenshotAs(OutputType.FILE);
+            try {
+                String rutaScreenshot = (OS == "Windows" ? "\\Screeshots\\cambioCantProductosCG.png" : "./Screenshots/cambioCantProductosCG.png");
+                FileHandler.copy(source, new File(rutaScreenshot));
+            }catch (Exception e2){
+                System.out.println(e2);
+            }
+            System.out.println("Screenshot taken");
         }
         //timeDelay(3000);
         driver.close();
